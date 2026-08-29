@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Stack - Sharp Vector Edition</title>
+    <style>
+        /* Sharp, Geometric Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            /* Pure, Solid Colors - NO Gradients */
+            --navy: #0A1930;
+            --navy-light: #152B4D;
+            --coral: #FF5A36;
+            --coral-dark: #E04321;
+            --white: #FFFFFF;
+            --off-white: #F4F5F7;
+            --black: #000000;
+            --gray: #6B7280;
+            --line-color: #E5E7EB;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #D1D5DB;
+            font-family: 'Inter', sans-serif;
+            color: var(--navy);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Invisible citations for production */
+        .sys-cite {
+            display: none !important;
+        }
+
+        /* A4 Landscape Container */
+        .page {
+            width: 297mm;
+            height: 210mm;
+            background: var(--white);
+            margin: 20px auto;
+            display: flex;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            page-break-after: always;
+        }
+
+        /* 3 Panels - Strict Columns */
+        .panel {
+            width: 99mm;
+            height: 100%;
+            padding: 24mm 16mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Sharp Column Dividers */
+        .panel:not(:last-child) {
+            border-right: 2px solid var(--line-color);
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        p {
+            margin: 0;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 58px;
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--navy);
+            margin-bottom: 24px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--coral);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--navy);
+            font-weight: 500;
+        }
+
+        /* Sharp Vector Elements */
+        .vector-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Solid Color Theme Classes */
+        .theme-navy {
+            background-color: var(--navy);
+            color: var(--white);
+        }
+
+        .theme-navy h2 {
+            color: var(--white);
+        }
+
+        .theme-navy p {
+            color: var(--off-white);
+        }
+
+        .theme-navy .panel-divider {
+            border-right-color: var(--navy-light);
+        }
+
+        .theme-coral {
+            background-color: var(--coral);
+            color: var(--white);
+        }
+
+        .theme-coral h2 {
+            color: var(--navy);
+        }
+
+        .theme-coral h3 {
+            color: var(--navy);
+        }
+
+        .theme-coral p {
+            color: var(--white);
+        }
+
+        /* UI Building Blocks (Hard Edges, No Shadows) */
+        .hard-box {
+            border: 2px solid var(--navy);
+            padding: 16px;
+            margin-bottom: 16px;
+            background: var(--white);
+            position: relative;
+        }
+
+        /* Brutalist Hard Shadow */
+        .hard-box::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 100%;
+            height: 100%;
+            background: var(--coral);
+            z-index: -1;
+            border: 2px solid var(--navy);
+        }
+
+        .theme-navy .hard-box {
+            border-color: var(--white);
+            background: var(--navy);
+        }
+
+        .theme-navy .hard-box::after {
+            background: var(--coral);
+            border-color: var(--white);
+        }
+
+        /* Crisp List Styles */
+        .vector-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-top: 2px solid var(--navy);
+        }
+
+        .vector-list li {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--navy);
+            padding: 14px 0;
+            border-bottom: 2px solid var(--navy);
+            display: flex;
+            align-items: center;
+        }
+
+        .vector-list li::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--coral);
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+
+        /* Sharp Workflow Steps */
+        .workflow-step {
+            margin-bottom: 24px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .workflow-num {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--coral);
+            line-height: 0.8;
+            letter-spacing: -0.05em;
+        }
+
+        /* Hard Tags */
+        .solid-tag {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--navy);
+            background: var(--white);
+            border: 2px solid var(--navy);
+            padding: 6px 12px;
+            margin: 0 4px 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Print Settings */
+        @media print {
+            body {
+                background: white;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                border: none;
+            }
+
+            .panel:not(:last-child) {
+                border-right: none;
+            }
+
+            /* Remove CSS borders for print, use SVGs if needed */
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1: OUTSIDE -->
+    <div class="page">
+
+        <!-- Inside Flap (Left) -->
+        <div class="panel">
+            <div style="z-index: 2; display: flex; flex-direction: column; height: 100%;">
+
+                <h3 style="color: var(--navy);">About Campaign Stack<span class="sys-cite">[cite: 2]</span></h3>
+
+                <p
+                    style="font-size: 16px; font-weight: 700; font-family: 'Montserrat', sans-serif; color: var(--navy); line-height: 1.3; margin-top: 12px; margin-bottom: 32px;">
+                    Campaign Stack is the premier open-source mass-emailing platform designed for organizations that
+                    demand absolute authority over their communications infrastructure.<span class="sys-cite">[cite:
+                        2]</span>
+                </p>
+
+                <div class="hard-box">
+                    <h3 style="font-size: 18px; margin-bottom: 8px;">Empower Your Marketing<span class="sys-cite">[cite:
+                            2]</span></h3>
+                    <p style="font-weight: 600;">Stop relying on restrictive SaaS platforms.<span
+                            class="sys-cite">[cite: 2]</span></p>
+                    <p style="margin-top: 8px;">Our self-hosted solution allows you to manage high-volume campaigns,
+                        protect subscriber privacy, and maintain full data sovereignty.<span class="sys-cite">[cite:
+                            2]</span></p>
+                </div>
+
+                <div style="margin-top: auto; border-top: 4px solid var(--navy); padding-top: 16px;">
+                    <h3 style="font-size: 14px; color: var(--navy); margin-bottom: 4px;">CARVING IT PVT. LTD.<span
+                            class="sys-cite">[cite: 2]</span></h3>
+                    <p style="font-size: 11px;">Enterprise-grade support and professional implementation services for
+                        open-source excellence.<span class="sys-cite">[cite: 2]</span></p>
+                    <p
+                        style="font-weight: 900; font-family: 'Montserrat'; color: var(--coral); margin-top: 12px; font-size: 14px;">
+                        WWW.CARVINGIT.COM<span class="sys-cite">[cite: 2]</span></p>
+                </div>
+            </div>
+
+            <!-- Sharp Vector Element -->
+            <svg class="vector-bg" viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="350" y="700" width="100" height="100" fill="var(--coral)" />
+                <circle cx="350" cy="700" r="50" fill="var(--navy)" />
+            </svg>
+        </div>
+
+        <!-- Back Cover (Middle) -->
+        <div class="panel theme-coral">
+            <!-- Solid Geometric Background Art -->
+            <svg class="vector-bg" viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 800 L400 400 L400 800 Z" fill="var(--coral-dark)" />
+                <rect x="50" y="50" width="300" height="700" stroke="var(--navy)" stroke-width="2" />
+            </svg>
+
+            <div style="z-index: 2; display: flex; flex-direction: column; height: 100%;">
+
+                <h2>Ready To Take<br>Control?<span class="sys-cite">[cite: 2]</span></h2>
+
+                <p
+                    style="font-size: 16px; font-weight: 700; font-family: 'Montserrat'; color: var(--navy); margin-bottom: 40px; text-transform: uppercase;">
+                    Maximize your marketing ROI with the power of open source.<span class="sys-cite">[cite: 2]</span>
+                </p>
+
+                <div
+                    style="background: var(--navy); padding: 24px; margin-bottom: 40px; border: 2px solid var(--white);">
+                    <p style="color: var(--white); font-weight: 700; font-size: 16px; margin-bottom: 12px;">Why pay for
+                        a platform that owns your relationships?<span class="sys-cite">[cite: 2]</span></p>
+                    <p style="color: var(--off-white);">Build your own infrastructure and keep your data where it
+                        belongs.<span class="sys-cite">[cite: 2]</span></p>
+                </div>
+
+                <div style="text-align: center;">
+                    <h3 style="color: var(--navy); font-size: 22px;">GET STARTED TODAY<span class="sys-cite">[cite:
+                            2]</span></h3>
+                    <p style="color: var(--white); font-weight: 600; margin-bottom: 24px;">Visit our website to schedule
+                        a consultation or download the platform.<span class="sys-cite">[cite: 2]</span></p>
+
+                    <div
+                        style="display: inline-block; background: var(--white); color: var(--navy); font-family: 'Montserrat'; font-weight: 900; font-size: 16px; padding: 16px 32px; border: 2px solid var(--navy);">
+                        WWW.CARVINGIT.COM<span class="sys-cite">[cite: 2]</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: auto; padding-top: 24px; text-align: center;">
+                    <p
+                        style="font-family: 'Montserrat'; font-size: 12px; font-weight: 900; letter-spacing: 0.2em; color: var(--navy);">
+                        OPEN SOURCE. SECURE. YOURS.<span class="sys-cite">[cite: 2]</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Front Cover (Right) -->
+        <div class="panel theme-navy">
+            <!-- Bold Solid Vector Art for Cover -->
+            <svg class="vector-bg" viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="400,100 0,600 400,600" fill="var(--navy-light)" />
+                <polygon points="400,400 150,800 400,800" fill="var(--coral)" />
+                <rect x="250" y="200" width="80" height="80" fill="var(--white)" />
+                <circle cx="250" cy="280" r="40" fill="var(--navy)" />
+            </svg>
+
+            <div style="z-index: 2; display: flex; flex-direction: column; height: 100%;">
+
+                <div style="margin-top: 80px;">
+                    <h1>CAMPAIGN<br><span style="color: var(--coral);">STACK</span><span class="sys-cite">[cite:
+                            2]</span></h1>
+                </div>
+
+                <div
+                    style="margin-top: auto; margin-bottom: 60px; background: var(--navy); padding: 24px; border-left: 8px solid var(--coral);">
+                    <h3 style="color: var(--white); font-size: 22px; line-height: 1.2; margin-bottom: 12px;">
+                        OWN YOUR REACH.<br>OWN YOUR DATA.<span class="sys-cite">[cite: 2]</span>
+                    </h3>
+                    <p style="color: var(--off-white); font-size: 14px; font-weight: 400;">Professional-Grade Email
+                        Marketing on Your Terms.<span class="sys-cite">[cite: 2]</span></p>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--coral); font-size: 12px; margin-bottom: 12px;">IDEAL FOR:<span
+                            class="sys-cite">[cite: 2]</span></h3>
+                    <div style="display: flex; flex-wrap: wrap;">
+                        <span class="solid-tag">High-Growth Businesses<span class="sys-cite">[cite: 2]</span></span>
+                        <span class="solid-tag">Enterprise Institutions<span class="sys-cite">[cite: 2]</span></span>
+                        <span class="solid-tag">Marketing Agencies<span class="sys-cite">[cite: 2]</span></span>
+                        <span class="solid-tag">Large-Scale Associations<span class="sys-cite">[cite: 2]</span></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: INSIDE -->
+    <div class="page">
+
+        <!-- Inside Left: Strategic Advantage -->
+        <div class="panel">
+            <div style="z-index: 2;">
+                <h2>The Strategic<br>Advantage<span class="sys-cite">[cite: 2]</span></h2>
+
+                <div style="margin-top: 32px;">
+                    <div style="margin-bottom: 32px;">
+                        <h3>Total Data Sovereignty<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>Eliminate third-party data risks.<span class="sys-cite">[cite: 2]</span> Keep your sensitive
+                            subscriber information and campaign intelligence within your own secure environment.<span
+                                class="sys-cite">[cite: 2]</span></p>
+                    </div>
+
+                    <div style="margin-bottom: 32px;">
+                        <h3>Unmatched Cost Efficiency<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>Break free from "per-subscriber" tax.<span class="sys-cite">[cite: 2]</span> Scale your
+                            audience without escalating software costs—you pay for infrastructure, not growth.<span
+                                class="sys-cite">[cite: 2]</span></p>
+                    </div>
+
+                    <div style="margin-bottom: 32px;">
+                        <h3>Infrastructure Agnostic<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>Connect to any SMTP provider or internal relay.<span class="sys-cite">[cite: 2]</span> Pivot
+                            between vendors seamlessly without migrating your core list management.<span
+                                class="sys-cite">[cite: 2]</span></p>
+                    </div>
+
+                    <div style="margin-bottom: 32px;">
+                        <h3>Adaptive Architecture<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>A fully customizable system that aligns with your specific sales workflows and integration
+                            requirements.<span class="sys-cite">[cite: 2]</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <svg class="vector-bg" viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="-50" cy="750" r="200" stroke="var(--line-color)" stroke-width="2" />
+            </svg>
+        </div>
+
+        <!-- Inside Middle: Enterprise Features -->
+        <div class="panel">
+            <div style="z-index: 2;">
+                <h2>Enterprise<br>Features<span class="sys-cite">[cite: 2]</span></h2>
+
+                <div style="margin-top: 32px;">
+                    <ul class="vector-list">
+                        <li>Mass Campaign Management<span class="sys-cite">[cite: 2]</span></li>
+                        <li>Dynamic Segmentation & Tagging<span class="sys-cite">[cite: 2]</span></li>
+                        <li>Real-time Delivery Tracking<span class="sys-cite">[cite: 2]</span></li>
+                        <li>Automated Scheduling Tools<span class="sys-cite">[cite: 2]</span></li>
+                        <li>Personalized Content Blocks<span class="sys-cite">[cite: 2]</span></li>
+                        <li>Seamless Data Import/Export<span class="sys-cite">[cite: 2]</span></li>
+                        <li>External SMTP/Relay Support<span class="sys-cite">[cite: 2]</span></li>
+                    </ul>
+
+                    <div style="background: var(--navy); color: var(--white); padding: 20px; margin-top: 24px;">
+                        <h3 style="color: var(--white); font-size: 16px; margin: 0; text-align: center;">Self-Hosted
+                            Docker Deployment<span class="sys-cite">[cite: 2]</span></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inside Right: Scalable Workflow -->
+        <div class="panel theme-navy">
+            <!-- Geometric Intersecting Paths Background -->
+            <svg class="vector-bg" viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 50 0 L 50 800" stroke="var(--coral)" stroke-width="4" />
+                <path d="M 0 400 L 400 400" stroke="var(--navy-light)" stroke-width="2" />
+                <rect x="25" y="250" width="50" height="50" fill="var(--navy)" />
+                <rect x="25" y="450" width="50" height="50" fill="var(--navy)" />
+                <rect x="25" y="650" width="50" height="50" fill="var(--navy)" />
+            </svg>
+
+            <div style="z-index: 2; display: flex; flex-direction: column; height: 100%;">
+                <h2>Scalable<br>Workflow<span class="sys-cite">[cite: 2]</span></h2>
+
+                <p
+                    style="font-size: 14px; font-weight: 600; color: var(--coral); margin-bottom: 60px; padding: 16px; border: 2px solid var(--coral); background: var(--navy);">
+                    Transform your outreach into a streamlined, automated revenue engine.<span class="sys-cite">[cite:
+                        2]</span>
+                </p>
+
+                <div style="padding-left: 24px;">
+                    <div class="workflow-step">
+                        <div class="workflow-num">01</div>
+                        <div>
+                            <h3 style="color: var(--white); font-size: 18px; margin-bottom: 8px;">ACQUIRE & SEGMENT<span
+                                    class="sys-cite">[cite: 2]</span></h3>
+                            <p>Advanced list management with custom fields for precise targeting.<span
+                                    class="sys-cite">[cite: 2]</span></p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step" style="margin-top: 100px;">
+                        <div class="workflow-num">02</div>
+                        <div>
+                            <h3 style="color: var(--white); font-size: 18px; margin-bottom: 8px;">ENGAGE & AUTOMATE<span
+                                    class="sys-cite">[cite: 2]</span></h3>
+                            <p>Design personalized campaigns and schedule them for peak impact.<span
+                                    class="sys-cite">[cite: 2]</span></p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step" style="margin-top: 100px;">
+                        <div class="workflow-num">03</div>
+                        <div>
+                            <h3 style="color: var(--white); font-size: 18px; margin-bottom: 8px;">ANALYZE & CONVERT<span
+                                    class="sys-cite">[cite: 2]</span></h3>
+                            <p>Track real-time engagement to optimize performance and drive ROI.<span
+                                    class="sys-cite">[cite: 2]</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

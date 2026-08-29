@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Stack - Adobe Artistic Edition</title>
+    <style>
+        /* Premium Creative Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            /* Trustworthy Base */
+            --indigo-dark: #1E1B4B;
+            --indigo-main: #312E81;
+            --indigo-light: #EEF2FF;
+
+            /* Energetic Accents */
+            --coral: #F43F5E;
+            --coral-light: #FFE4E6;
+            --amber: #F59E0B;
+
+            /* Canvas Colors */
+            --canvas: #FAFAFC;
+            --white: #FFFFFF;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+
+            /* Creative Gradients */
+            --gradient-energy: linear-gradient(135deg, var(--coral) 0%, var(--amber) 100%);
+            --gradient-trust: linear-gradient(135deg, var(--indigo-dark) 0%, var(--indigo-main) 100%);
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #E5E7EB;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Invisible citations for production */
+        .sys-cite {
+            display: none !important;
+        }
+
+        /* A4 Landscape Container */
+        .page {
+            width: 297mm;
+            height: 210mm;
+            background: var(--canvas);
+            margin: 20px auto;
+            display: flex;
+            box-shadow: 0 40px 100px -20px rgba(30, 27, 75, 0.2);
+            overflow: hidden;
+            position: relative;
+            page-break-after: always;
+        }
+
+        /* 3 Panels */
+        .panel {
+            width: 99mm;
+            height: 100%;
+            padding: 24mm 16mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Fluid Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        p {
+            margin: 0;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 54px;
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--white);
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--indigo-dark);
+            margin-bottom: 24px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--indigo-main);
+            margin-bottom: 8px;
+        }
+
+        p {
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Artistic UI Elements - Floating Cards */
+        .art-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 15px 35px -10px rgba(30, 27, 75, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 10;
+        }
+
+        .art-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .art-card-accent {
+            background: var(--gradient-energy);
+            color: var(--white);
+        }
+
+        .art-card-accent h3 {
+            color: var(--white);
+        }
+
+        .art-card-accent p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Custom Graphic Bullets */
+        .creative-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .creative-list li {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--indigo-dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            padding: 12px 16px;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px -5px rgba(30, 27, 75, 0.05);
+        }
+
+        .creative-list li::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gradient-energy);
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        /* Flowing Workflow */
+        .flow-step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .flow-step::after {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 45px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background: dashed 2px var(--coral-light);
+            z-index: -1;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .flow-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 16px;
+            background: var(--gradient-energy);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 18px;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.3);
+        }
+
+        /* Fluid Vector Backgrounds */
+        .fluid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .gradient-text {
+            background: var(--gradient-energy);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .pill-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 100px;
+            margin: 0 4px 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Print Settings */
+        @media print {
+            body {
+                background: white;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                border: none;
+            }
+
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1: OUTSIDE -->
+    <div class="page">
+
+        <!-- Inside Flap (Left) -->
+        <div class="panel">
+            <div class="fluid-bg">
+                <svg viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0H400V300C400 300 250 450 0 350V0Z" fill="var(--indigo-light)" opacity="0.5" />
+                    <circle cx="0" cy="800" r="200" fill="var(--coral-light)" opacity="0.4" />
+                </svg>
+            </div>
+
+            <div style="z-index: 2; display: flex; flex-direction: column; height: 100%;">
+                <h2 style="font-size: 18px; text-transform: uppercase; letter-spacing: 2px; color: var(--coral);">About
+                    Campaign Stack<span class="sys-cite">[cite: 2]</span></h2>
+
+                <p
+                    style="font-size: 16px; font-family: 'Outfit'; font-weight: 500; color: var(--indigo-dark); line-height: 1.4; margin-bottom: 24px;">
+                    Campaign Stack is the premier open-source mass-emailing platform designed for organizations that
+                    demand absolute authority over their communications infrastructure.<span class="sys-cite">[cite:
+                        2]</span>
+                </p>
+
+                <div class="art-card art-card-accent">
+                    <h3 style="font-size: 20px; margin-bottom: 12px;">Empower Your Marketing<span
+                            class="sys-cite">[cite: 2]</span></h3>
+                    <p style="font-size: 13.5px; line-height: 1.6;">
+                        Stop relying on restrictive SaaS platforms.<span class="sys-cite">[cite: 2]</span> Our
+                        self-hosted solution allows you to manage high-volume campaigns, protect subscriber privacy, and
+                        maintain full data sovereignty.<span class="sys-cite">[cite: 2]</span>
+                    </p>
+                </div>
+
+                <div style="margin-top: auto; padding-top: 24px; text-align: center;">
+                    <h3 style="font-size: 12px; letter-spacing: 1px; margin-bottom: 4px;">CARVING IT PVT. LTD.<span
+                            class="sys-cite">[cite: 2]</span></h3>
+                    <p style="font-size: 11px;">Enterprise-grade support and professional implementation services for
+                        open-source excellence.<span class="sys-cite">[cite: 2]</span></p>
+                    <div
+                        style="margin-top: 12px; font-weight: 700; color: var(--coral); font-family: 'Outfit'; font-size: 14px;">
+                        WWW.CARVINGIT.COM<span class="sys-cite">[cite: 2]</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Cover (Middle) -->
+        <div class="panel" style="background: var(--gradient-trust); color: var(--white);">
+            <div class="fluid-bg">
+                <svg viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M400 800H0V500C0 500 150 350 400 450V800Z" fill="rgba(244, 63, 94, 0.15)" />
+                    <circle cx="200" cy="200" r="150" stroke="rgba(255,255,255,0.05)" stroke-width="40" />
+                </svg>
+            </div>
+
+            <div
+                style="z-index: 2; display: flex; flex-direction: column; height: 100%; justify-content: center; text-align: center;">
+
+                <h2 style="color: var(--white); font-size: 32px; margin-bottom: 16px;">Ready to Take<br>Control?<span
+                        class="sys-cite">[cite: 2]</span></h2>
+
+                <p style="color: var(--amber); font-size: 16px; font-weight: 600; margin-bottom: 32px;">
+                    Maximize your marketing ROI with the power of open source.<span class="sys-cite">[cite: 2]</span>
+                </p>
+
+                <div
+                    style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 24px; margin-bottom: 40px;">
+                    <p style="color: var(--white); font-weight: 700; font-size: 15px; margin-bottom: 8px;">Why pay for a
+                        platform that owns your relationships?<span class="sys-cite">[cite: 2]</span></p>
+                    <p style="color: rgba(255,255,255,0.7);">Build your own infrastructure and keep your data where it
+                        belongs.<span class="sys-cite">[cite: 2]</span></p>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--white); font-size: 20px; letter-spacing: 1px;">GET STARTED TODAY<span
+                            class="sys-cite">[cite: 2]</span></h3>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 24px;">Visit our website to schedule a
+                        consultation or download the platform.<span class="sys-cite">[cite: 2]</span></p>
+
+                    <div
+                        style="display: inline-block; background: var(--white); color: var(--indigo-dark); font-family: 'Outfit'; font-weight: 900; font-size: 16px; padding: 14px 32px; border-radius: 100px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+                        WWW.CARVINGIT.COM<span class="sys-cite">[cite: 2]</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: auto; padding-top: 24px;">
+                    <p
+                        style="font-family: 'Outfit'; font-size: 11px; font-weight: 900; letter-spacing: 0.3em; color: rgba(255,255,255,0.4); text-transform: uppercase;">
+                        Open Source. Secure. Yours.<span class="sys-cite">[cite: 2]</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Front Cover (Right) -->
+        <div class="panel" style="background: var(--indigo-dark); overflow: hidden;">
+            <div class="fluid-bg">
+                <!-- Beautiful organic fluid shape for the cover -->
+                <svg viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M472.5 137.5C472.5 281.08 393.58 433 250 433C106.42 433 -23.5 350.08 -23.5 206.5C-23.5 62.9201 106.42 -42.5 250 -42.5C393.58 -42.5 472.5 -6.07986 472.5 137.5Z"
+                        fill="url(#paint0_linear)" />
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="-23.5" y1="-42.5" x2="472.5" y2="433"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#F43F5E" />
+                            <stop offset="1" stop-color="#F59E0B" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <div style="z-index: 2; display: flex; flex-direction: column; height: 100%;">
+
+                <div style="margin-top: 80px;">
+                    <h1 style="text-shadow: 0 10px 30px rgba(244, 63, 94, 0.4);">CAMPAIGN<br>STACK<span
+                            class="sys-cite">[cite: 2]</span></h1>
+                </div>
+
+                <div
+                    style="margin-top: auto; margin-bottom: 40px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); padding: 24px; border-radius: 24px;">
+                    <h3 style="color: var(--white); font-size: 20px; line-height: 1.3; margin-bottom: 8px;">
+                        OWN YOUR REACH.<br>OWN YOUR DATA.<span class="sys-cite">[cite: 2]</span>
+                    </h3>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 14px;">Professional-Grade Email Marketing on Your
+                        Terms.<span class="sys-cite">[cite: 2]</span></p>
+                </div>
+
+                <div>
+                    <p
+                        style="font-family: 'Outfit'; font-size: 10px; font-weight: 700; color: var(--amber); margin-bottom: 12px; letter-spacing: 0.1em;">
+                        IDEAL FOR:<span class="sys-cite">[cite: 2]</span></p>
+                    <div style="display: flex; flex-wrap: wrap;">
+                        <span class="pill-tag">High-Growth Businesses<span class="sys-cite">[cite: 2]</span></span>
+                        <span class="pill-tag">Enterprise Institutions<span class="sys-cite">[cite: 2]</span></span>
+                        <span class="pill-tag">Marketing Agencies<span class="sys-cite">[cite: 2]</span></span>
+                        <span class="pill-tag">Large-Scale Associations<span class="sys-cite">[cite: 2]</span></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: INSIDE -->
+    <div class="page">
+
+        <!-- Inside Left: Strategic Advantage -->
+        <div class="panel">
+            <div class="fluid-bg">
+                <svg viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="750" r="150" fill="var(--indigo-light)" opacity="0.6" />
+                </svg>
+            </div>
+
+            <div style="z-index: 2;">
+                <h2>The Strategic<br><span class="gradient-text">Advantage</span><span class="sys-cite">[cite: 2]</span>
+                </h2>
+
+                <div style="margin-top: 24px;">
+                    <div class="art-card">
+                        <h3>Total Data Sovereignty<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>Eliminate third-party data risks.<span class="sys-cite">[cite: 2]</span> Keep your sensitive
+                            subscriber information and campaign intelligence within your own secure environment.<span
+                                class="sys-cite">[cite: 2]</span></p>
+                    </div>
+
+                    <div class="art-card">
+                        <h3>Unmatched Cost Efficiency<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>Break free from "per-subscriber" tax.<span class="sys-cite">[cite: 2]</span> Scale your
+                            audience without escalating software costs—you pay for infrastructure, not growth.<span
+                                class="sys-cite">[cite: 2]</span></p>
+                    </div>
+
+                    <div class="art-card">
+                        <h3>Infrastructure Agnostic<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>Connect to any SMTP provider or internal relay.<span class="sys-cite">[cite: 2]</span> Pivot
+                            between vendors seamlessly without migrating your core list management.<span
+                                class="sys-cite">[cite: 2]</span></p>
+                    </div>
+
+                    <div class="art-card">
+                        <h3>Adaptive Architecture<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>A fully customizable system that aligns with your specific sales workflows and integration
+                            requirements.<span class="sys-cite">[cite: 2]</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inside Middle: Enterprise Features -->
+        <div class="panel">
+            <div style="z-index: 2;">
+                <h2>Enterprise<br>Features<span class="sys-cite">[cite: 2]</span></h2>
+
+                <div style="margin-top: 24px;">
+                    <ul class="creative-list">
+                        <li>Mass Campaign Management<span class="sys-cite">[cite: 2]</span></li>
+                        <li>Dynamic Segmentation & Tagging<span class="sys-cite">[cite: 2]</span></li>
+                        <li>Real-time Delivery Tracking<span class="sys-cite">[cite: 2]</span></li>
+                        <li>Automated Scheduling Tools<span class="sys-cite">[cite: 2]</span></li>
+                        <li>Personalized Content Blocks<span class="sys-cite">[cite: 2]</span></li>
+                        <li>Seamless Data Import/Export<span class="sys-cite">[cite: 2]</span></li>
+                        <li>External SMTP/Relay Support<span class="sys-cite">[cite: 2]</span></li>
+                    </ul>
+
+                    <div class="art-card art-card-accent" style="margin-top: 24px; padding: 16px; text-align: center;">
+                        <h3 style="font-size: 14px; margin: 0;">Self-Hosted Docker Deployment<span
+                                class="sys-cite">[cite: 2]</span></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inside Right: Scalable Workflow -->
+        <div class="panel" style="background: var(--canvas);">
+            <div class="fluid-bg">
+                <svg viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M400 0H200C200 0 350 150 400 250V0Z" fill="var(--coral-light)" opacity="0.4" />
+                </svg>
+            </div>
+
+            <div style="z-index: 2;">
+                <h2>Scalable<br><span class="gradient-text">Workflow</span><span class="sys-cite">[cite: 2]</span></h2>
+
+                <p
+                    style="font-size: 14px; font-family: 'Outfit'; font-weight: 500; color: var(--indigo-dark); margin-bottom: 40px; background: var(--white); padding: 16px; border-radius: 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.03);">
+                    Transform your outreach into a streamlined, automated revenue engine.<span class="sys-cite">[cite:
+                        2]</span>
+                </p>
+
+                <div style="margin-top: 20px; padding-left: 10px;">
+                    <div class="flow-step">
+                        <div class="flow-icon">1</div>
+                        <div>
+                            <h3 style="font-size: 18px; margin-bottom: 4px;">Acquire & Segment<span
+                                    class="sys-cite">[cite: 2]</span></h3>
+                            <p>Advanced list management with custom fields for precise targeting.<span
+                                    class="sys-cite">[cite: 2]</span></p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-icon">2</div>
+                        <div>
+                            <h3 style="font-size: 18px; margin-bottom: 4px;">Engage & Automate<span
+                                    class="sys-cite">[cite: 2]</span></h3>
+                            <p>Design personalized campaigns and schedule them for peak impact.<span
+                                    class="sys-cite">[cite: 2]</span></p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-icon">3</div>
+                        <div>
+                            <h3 style="font-size: 18px; margin-bottom: 4px;">Analyze & Convert<span
+                                    class="sys-cite">[cite: 2]</span></h3>
+                            <p>Track real-time engagement to optimize performance and drive ROI.<span
+                                    class="sys-cite">[cite: 2]</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Stack - Minimalist Brochure</title>
+    <style>
+        /* Premium Minimalist Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #1d1d1f;
+            --text-muted: #86868b;
+            --bento-bg: #f5f5f7;
+            --accent: #000000;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #e5e5ea;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-main);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Hide citations for print aesthetics */
+        .cite-hide {
+            display: none;
+        }
+
+        /* A4 Landscape Container */
+        .page {
+            width: 297mm;
+            height: 210mm;
+            background: var(--bg-color);
+            margin: 20px auto;
+            display: flex;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            page-break-after: always;
+        }
+
+        /* 3 Panels */
+        .panel {
+            width: 99mm;
+            height: 100%;
+            padding: 24mm 16mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Subtle Fold Lines (Hidden on print) */
+        .panel:not(:last-child) {
+            border-right: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        p {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+        }
+
+        p {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Bento Box UI Approach */
+        .bento-box {
+            background: var(--bento-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .bento-box.dark {
+            background: var(--text-main);
+            color: #ffffff;
+        }
+
+        .bento-box.dark p {
+            color: #a1a1a6;
+        }
+
+        /* Specific Layouts */
+
+        /* Front Cover */
+        .cover-panel {
+            justify-content: space-between;
+        }
+
+        .cover-title {
+            margin-top: 40px;
+        }
+
+        .cover-title h1 {
+            font-size: 52px;
+            text-transform: uppercase;
+        }
+
+        .cover-title .sub {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: -0.02em;
+        }
+
+        .cover-footer {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Flap (Features) */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-top: 20px;
+        }
+
+        .feature-list li {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: '●';
+            color: var(--text-main);
+            font-size: 10px;
+            margin-right: 12px;
+        }
+
+        /* Workflow Steps */
+        .step-num {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-main);
+            background: #e5e5ea;
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        /* Giant Text Panel */
+        .hero-text {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        /* Print Override */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                border: none;
+            }
+
+            .panel {
+                border-right: none !important;
+            }
+
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1: OUTSIDE -->
+    <div class="page">
+
+        <!-- Inside Flap (Left) -->
+        <div class="panel">
+            <h2>Everything You Need.<br>Nothing You Don't.</h2>
+            <div class="bento-box">
+                <ul class="feature-list">
+                    <li>Limitless Mass Campaigns</li>
+                    <li>Advanced Audience Segmentation</li>
+                    <li>Dynamic Personalization</li>
+                    <li>Automated Scheduling</li>
+                    <li>Real-Time Delivery Analytics</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Back Cover (Middle) -->
+        <div class="panel" style="justify-content: space-between;">
+            <div>
+                <h2>The Cost Advantage</h2>
+                <div class="bento-box dark">
+                    <h3 style="color: white; font-size: 20px; line-height: 1.3; margin-bottom: 12px;">
+                        "Most platforms punish you for growing."
+                    </h3>
+                    <p>With Campaign Stack, scale to infinity without ever paying per-subscriber fees.<span
+                            class="cite-hide"></span></p>
+                </div>
+            </div>
+
+            <div class="bento-box" style="text-align: center; padding: 16px;">
+                <p style="margin-bottom: 4px; font-size: 11px; text-transform: uppercase;">Deploy your stack today</p>
+                <h3 style="margin: 0; font-size: 16px;">www.carvingit.com</h3>
+                <span class="cite-hide"></span>
+            </div>
+        </div>
+
+        <!-- Front Cover (Right) -->
+        <div class="panel cover-panel">
+            <div class="cover-title">
+                <h1>CAMPAIGN<br>STACK</h1>
+                <div class="sub">Your Emails.<br>Your Servers.<br>Your Rules.</div>
+            </div>
+
+            <div class="bento-box" style="margin-bottom: 40px;">
+                <p style="color: var(--text-main); font-weight: 600; font-size: 14px;">Stop renting your audience. Own
+                    your infrastructure.</p>
+            </div>
+
+            <div class="cover-footer">CARVING IT PVT. LTD.<span class="cite-hide"></span></div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: INSIDE -->
+    <div class="page">
+
+        <!-- Inside Left: The Why -->
+        <div class="panel" style="background: #fafafa;">
+            <div class="bento-box">
+                <h3>Absolute Privacy</h3>
+                <p>Keep subscriber data locked safely inside your own environment.<span class="cite-hide"></span></p>
+            </div>
+
+            <div class="bento-box">
+                <h3>Zero Penalties</h3>
+                <p>Enjoy flat infrastructure costs, whether you have a thousand subscribers or a million.<span
+                        class="cite-hide"></span></p>
+            </div>
+
+            <div class="bento-box">
+                <h3>SMTP Freedom</h3>
+                <p>Plug in your preferred SMTP provider with zero friction.<span class="cite-hide"></span></p>
+            </div>
+
+            <div class="bento-box">
+                <h3>Open Source</h3>
+                <p>Inspect the code, extend the features, and make the platform entirely yours.<span
+                        class="cite-hide"></span></p>
+            </div>
+        </div>
+
+        <!-- Inside Middle: The Workflow -->
+        <div class="panel">
+            <h2>How It Works</h2>
+
+            <div class="bento-box">
+                <div class="step-num">01. Import</div>
+                <h3>Seamless Migration</h3>
+                <p>Seamlessly migrate existing contacts and segment them with laser precision.<span
+                        class="cite-hide"></span></p>
+            </div>
+
+            <div class="bento-box">
+                <div class="step-num">02. Send</div>
+                <h3>Craft Campaigns</h3>
+                <p>Craft high-converting campaigns using clean, dynamic templates.<span class="cite-hide"></span></p>
+            </div>
+
+            <div class="bento-box">
+                <div class="step-num">03. Analyze</div>
+                <h3>Real-Time Tracking</h3>
+                <p>Track opens, clicks, and engagement the second they happen.<span class="cite-hide"></span></p>
+            </div>
+        </div>
+
+        <!-- Inside Right: The Vision -->
+        <div class="panel" style="background: var(--text-main); color: white;">
+            <div class="hero-text">
+                OWN<br>YOUR<br>STACK.<br>
+                <span style="color: #86868b;">SCALE<br>WITHOUT<br>LIMITS.</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

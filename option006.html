@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Stack - Pro Edition</title>
+    <style>
+        /* Premium System Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap');
+
+        :root {
+            --space-black: #09090b;
+            --zinc-900: #18181b;
+            --zinc-800: #27272a;
+            --zinc-100: #f4f4f5;
+            --pure-white: #ffffff;
+            --accent-orange: #f97316;
+            --accent-glow: rgba(249, 115, 22, 0.15);
+            --text-muted: #a1a1aa;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #e4e4e7;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+            color: var(--space-black);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Invisible citations for production */
+        .sys-cite {
+            display: none !important;
+        }
+
+        /* A4 Landscape Container */
+        .page {
+            width: 297mm;
+            height: 210mm;
+            background: var(--pure-white);
+            margin: 20px auto;
+            display: flex;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            page-break-after: always;
+        }
+
+        /* 3 Panels */
+        .panel {
+            width: 99mm;
+            height: 100%;
+            padding: 22mm 16mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Typographic Hierarchy */
+        h1,
+        h2,
+        h3,
+        h4,
+        p {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            color: var(--pure-white);
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--space-black);
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--space-black);
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        p {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #52525b;
+            font-weight: 500;
+        }
+
+        /* Theme Classes */
+        .theme-dark {
+            background-color: var(--space-black);
+            color: var(--pure-white);
+        }
+
+        .theme-dark h2 {
+            color: var(--pure-white);
+        }
+
+        .theme-dark h3 {
+            color: var(--pure-white);
+        }
+
+        .theme-dark p {
+            color: var(--text-muted);
+        }
+
+        /* Bento Box Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .bento-card {
+            background: var(--pure-white);
+            border: 1px solid #e4e4e7;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--accent-orange);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Force active state for print */
+        .bento-card.active-edge::before {
+            opacity: 1;
+        }
+
+        .theme-dark .bento-card {
+            background: var(--zinc-900);
+            border: 1px solid var(--zinc-800);
+        }
+
+        /* Feature Lists */
+        .list-group {
+            margin-bottom: 16px;
+            background: var(--zinc-100);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .list-group h4 {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-orange);
+            margin-bottom: 10px;
+        }
+
+        .pro-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pro-list li {
+            font-size: 11.5px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .pro-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .pro-list li::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--space-black);
+            margin-right: 10px;
+        }
+
+        /* Psychological Anchors */
+        .step-anchor {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            align-items: flex-start;
+        }
+
+        .step-digit {
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 0.8;
+            color: var(--accent-orange);
+            letter-spacing: -0.05em;
+        }
+
+        .pill-badge {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 800;
+            color: var(--space-black);
+            background: var(--pure-white);
+            padding: 4px 10px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 0 4px 6px 0;
+            border: 1px solid #e4e4e7;
+        }
+
+        .theme-dark .pill-badge {
+            background: var(--zinc-900);
+            border-color: var(--zinc-800);
+            color: var(--pure-white);
+        }
+
+        /* Minimalist Grid Background */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .theme-dark .bg-grid {
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+
+        /* Print Settings */
+        @media print {
+            body {
+                background: white;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                border: none;
+            }
+
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1: OUTSIDE -->
+    <div class="page">
+
+        <!-- Flap: About (Left) -->
+        <div class="panel">
+            <div class="bg-grid"></div>
+            <div style="z-index: 2; display: flex; flex-direction: column; height: 100%;">
+
+                <h2>Empower Your<br>Marketing.<span class="sys-cite">[cite: 2]</span></h2>
+
+                <p
+                    style="font-size: 14px; font-weight: 600; color: var(--space-black); margin-bottom: 24px; line-height: 1.5;">
+                    Campaign Stack is the premier open-source mass-emailing platform designed for organizations that
+                    demand absolute authority over their communications infrastructure.<span class="sys-cite">[cite:
+                        2]</span>
+                </p>
+
+                <div class="bento-grid">
+                    <div class="bento-card active-edge">
+                        <h3>Sovereignty</h3>
+                        <p>Protect subscriber privacy and maintain full data sovereignty.<span class="sys-cite">[cite:
+                                2]</span></p>
+                    </div>
+                    <div class="bento-card">
+                        <h3>Independence</h3>
+                        <p>Stop relying on restrictive SaaS platforms.<span class="sys-cite">[cite: 2]</span></p>
+                    </div>
+                    <div class="bento-card">
+                        <h3>Volume</h3>
+                        <p>Manage high-volume campaigns effortlessly on your own terms.<span class="sys-cite">[cite:
+                                2]</span></p>
+                    </div>
+                </div>
+
+                <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid #e4e4e7;">
+                    <h3 style="font-size: 11px; margin-bottom: 4px; letter-spacing: 0.1em; text-transform: uppercase;">
+                        CARVING IT PVT. LTD.<span class="sys-cite">[cite: 2]</span></h3>
+                    <p style="font-size: 10px; color: var(--text-muted);">Enterprise-grade support and professional
+                        implementation services for open-source excellence.<span class="sys-cite">[cite: 2]</span></p>
+                    <p style="font-weight: 700; color: var(--space-black); margin-top: 6px; font-size: 12px;">
+                        www.carvingit.com<span class="sys-cite">[cite: 2]</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Cover: CTA (Middle) -->
+        <div class="panel theme-dark">
+            <div class="bg-grid"></div>
+            <div style="z-index: 2; display: flex; flex-direction: column; height: 100%;">
+
+                <h2 style="font-size: 28px;">Ready to<br>Take Control?<span class="sys-cite">[cite: 2]</span></h2>
+
+                <div class="bento-card" style="margin-top: 10px;">
+                    <p style="color: var(--pure-white); font-weight: 600; font-size: 14px; margin-bottom: 8px;">Why pay
+                        for a platform that owns your relationships?<span class="sys-cite">[cite: 2]</span></p>
+                    <p>Build your own infrastructure and keep your data where it belongs.<span class="sys-cite">[cite:
+                            2]</span></p>
+                </div>
+
+                <div style="margin-top: auto; text-align: left;">
+                    <div style="width: 40px; height: 4px; background: var(--accent-orange); margin-bottom: 20px;"></div>
+                    <h3 style="font-size: 18px; letter-spacing: -0.02em;">GET STARTED TODAY<span class="sys-cite">[cite:
+                            2]</span></h3>
+                    <p style="margin-bottom: 24px; font-size: 13px;">Visit our website to schedule a consultation or
+                        download the platform.<span class="sys-cite">[cite: 2]</span></p>
+
+                    <div
+                        style="display: inline-block; background: var(--pure-white); color: var(--space-black); font-weight: 800; font-size: 14px; padding: 12px 24px; border-radius: 6px; margin-bottom: 30px;">
+                        www.carvingit.com<span class="sys-cite">[cite: 2]</span>
+                    </div>
+
+                    <p
+                        style="font-size: 10px; font-weight: 800; color: var(--text-muted); letter-spacing: 0.2em; text-transform: uppercase;">
+                        Open Source. Secure. Yours.<span class="sys-cite">[cite: 2]</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Front Cover (Right) -->
+        <div class="panel theme-dark" style="background-color: var(--space-black);">
+            <div class="bg-grid"></div>
+
+            <!-- Minimal Geometric Accent -->
+            <svg style="position: absolute; top: -50px; right: -50px; z-index: 1;" width="250" height="250"
+                viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.05)" stroke-width="20" fill="none" />
+                <circle cx="50" cy="50" r="40" stroke="var(--accent-orange)" stroke-width="2" stroke-dasharray="10 20"
+                    fill="none" opacity="0.5" />
+            </svg>
+
+            <div style="z-index: 2; display: flex; flex-direction: column; height: 100%; justify-content: center;">
+
+                <h1 style="color: var(--pure-white);">CAMPAIGN<br><span
+                        style="color: var(--accent-orange);">STACK</span><span class="sys-cite">[cite: 2]</span></h1>
+
+                <div style="margin-top: 32px; border-left: 2px solid var(--accent-orange); padding-left: 16px;">
+                    <h3 style="font-size: 18px; margin-bottom: 8px;">OWN YOUR REACH.<br>OWN YOUR DATA.<span
+                            class="sys-cite">[cite: 2]</span></h3>
+                    <p style="font-size: 13px; color: var(--text-muted); font-weight: 500;">Professional-Grade Email
+                        Marketing on Your Terms.<span class="sys-cite">[cite: 2]</span></p>
+                </div>
+
+                <div style="margin-top: 60px;">
+                    <p
+                        style="font-size: 9px; font-weight: 800; color: var(--text-muted); margin-bottom: 12px; letter-spacing: 0.1em; text-transform: uppercase;">
+                        IDEAL FOR:<span class="sys-cite">[cite: 2]</span></p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                        <span class="pill-badge">High-Growth Businesses<span class="sys-cite">[cite: 2]</span></span>
+                        <span class="pill-badge">Enterprise Institutions<span class="sys-cite">[cite: 2]</span></span>
+                        <span class="pill-badge">Marketing Agencies<span class="sys-cite">[cite: 2]</span></span>
+                        <span class="pill-badge">Large-Scale Associations<span class="sys-cite">[cite: 2]</span></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: INSIDE -->
+    <div class="page">
+
+        <!-- Inside Left: Strategic Advantage (Bento Grid) -->
+        <div class="panel">
+            <div class="bg-grid"></div>
+            <div style="z-index: 2;">
+                <h2>Strategic<br>Advantage<span class="sys-cite">[cite: 2]</span></h2>
+
+                <div class="bento-grid" style="margin-top: 24px;">
+                    <div class="bento-card">
+                        <h3>Data Sovereignty<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>Eliminate third-party data risks. Keep sensitive subscriber information and intelligence
+                            within your own secure environment.<span class="sys-cite">[cite: 2]</span></p>
+                    </div>
+
+                    <div class="bento-card">
+                        <h3>Cost Efficiency<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>Break free from the "per-subscriber" tax. Scale your audience without escalating software
+                            costs—pay only for infrastructure.<span class="sys-cite">[cite: 2]</span></p>
+                    </div>
+
+                    <div class="bento-card">
+                        <h3>Agnostic Infrastructure<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>Connect to any SMTP provider or internal relay. Pivot vendors seamlessly without migrating
+                            your core lists.<span class="sys-cite">[cite: 2]</span></p>
+                    </div>
+
+                    <div class="bento-card">
+                        <h3>Adaptive Architecture<span class="sys-cite">[cite: 2]</span></h3>
+                        <p>A fully customizable system that aligns perfectly with your specific sales workflows and
+                            integration requirements.<span class="sys-cite">[cite: 2]</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inside Middle: Enterprise Features -->
+        <div class="panel">
+            <div class="bg-grid"></div>
+            <div style="z-index: 2;">
+                <h2>Enterprise<br>Features<span class="sys-cite">[cite: 2]</span></h2>
+
+                <div style="margin-top: 24px;">
+
+                    <div class="list-group">
+                        <h4>Campaign Engine</h4>
+                        <ul class="pro-list">
+                            <li>Mass Campaign Management<span class="sys-cite">[cite: 2]</span></li>
+                            <li>Automated Scheduling Tools<span class="sys-cite">[cite: 2]</span></li>
+                            <li>Personalized Content Blocks<span class="sys-cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="list-group">
+                        <h4>Audience Control</h4>
+                        <ul class="pro-list">
+                            <li>Dynamic Segmentation & Tagging<span class="sys-cite">[cite: 2]</span></li>
+                            <li>Seamless Data Import/Export<span class="sys-cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="list-group">
+                        <h4>Analytics & Delivery</h4>
+                        <ul class="pro-list">
+                            <li>Real-time Delivery Tracking<span class="sys-cite">[cite: 2]</span></li>
+                            <li>External SMTP/Relay Support<span class="sys-cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="list-group" style="background: transparent; border: 1px dashed #d4d4d8;">
+                        <h4 style="color: var(--space-black);">Deployment</h4>
+                        <ul class="pro-list">
+                            <li>Self-Hosted Docker Deployment<span class="sys-cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Inside Right: Scalable Workflow -->
+        <div class="panel theme-dark">
+            <div class="bg-grid"></div>
+            <div style="z-index: 2;">
+                <h2>Scalable<br>Workflow<span class="sys-cite">[cite: 2]</span></h2>
+
+                <p style="color: var(--pure-white); font-weight: 600; font-size: 13px; margin-bottom: 40px;">
+                    Transform your outreach into a streamlined, automated revenue engine.<span class="sys-cite">[cite:
+                        2]</span>
+                </p>
+
+                <div style="margin-top: 20px;">
+                    <div class="step-anchor">
+                        <div class="step-digit">01<span class="sys-cite">[cite: 2]</span></div>
+                        <div>
+                            <h3 style="font-size: 14px;">Acquire & Segment<span class="sys-cite">[cite: 2]</span></h3>
+                            <p>Advanced list management with custom fields for precise targeting.<span
+                                    class="sys-cite">[cite: 2]</span></p>
+                        </div>
+                    </div>
+
+                    <div class="step-anchor">
+                        <div class="step-digit">02<span class="sys-cite">[cite: 2]</span></div>
+                        <div>
+                            <h3 style="font-size: 14px;">Engage & Automate<span class="sys-cite">[cite: 2]</span></h3>
+                            <p>Design personalized campaigns and schedule them for peak impact.<span
+                                    class="sys-cite">[cite: 2]</span></p>
+                        </div>
+                    </div>
+
+                    <div class="step-anchor">
+                        <div class="step-digit">03<span class="sys-cite">[cite: 2]</span></div>
+                        <div>
+                            <h3 style="font-size: 14px;">Analyze & Convert<span class="sys-cite">[cite: 2]</span></h3>
+                            <p>Track real-time engagement to optimize performance and drive ROI.<span
+                                    class="sys-cite">[cite: 2]</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
