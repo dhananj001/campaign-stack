@@ -302,34 +302,114 @@
             </svg>
         </div>
 
-        <!-- Back Cover (Middle) -->
-        <div class="panel bg-dark">
-            <h2 style="border-bottom: none;">The Cost Advantage<span class="sys-cite">[cite: 1]</span></h2>
-
-            <div class="quote-container">
-                <div class="quote-icon">"</div>
-                <p style="font-size: 15px; font-style: italic; color: white; line-height: 1.7;">
-                    Stop paying more simply because your mailing list grows. With Campaign Stack, your infrastructure
-                    costs remain flat.<span class="sys-cite">[cite: 1]</span>
-                </p>
-            </div>
-
-            <div style="margin-top: auto; text-align: center; z-index: 10;">
-                <h3 style="color: var(--white); font-size: 20px;">OWN YOUR STACK.<br><span
-                        style="color: var(--orange);">SCALE WITHOUT LIMITS.</span><span class="sys-cite">[cite:
-                        1]</span></h3>
-                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-                    <p style="font-family: 'Poppins'; font-weight: 700; color: var(--white); letter-spacing: 1px;">
-                        www.carvingit.com<span class="sys-cite">[cite: 1]</span></p>
-                </div>
-            </div>
+        <!-- Back Cover (Middle) - Integrated CTA & Contact Info -->
+        <div class="panel bg-dark"
+            style="background-color: var(--deep-blue); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative;">
 
             <!-- Abstract Vector Graphic -->
-            <svg class="vector-bg" viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg">
-                <rect x="50" y="50" width="300" height="700" stroke="rgba(255,255,255,0.05)" stroke-width="1"
+            <svg class="vector-bg" viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" style="z-index: 1;">
+                <circle cx="200" cy="200" r="180" stroke="rgba(255,87,34,0.12)" stroke-width="2" fill="none" />
+                <circle cx="200" cy="200" r="130" stroke="var(--deep-blue-light)" stroke-width="20" opacity="0.4"
                     fill="none" />
-                <circle cx="200" cy="400" r="250" stroke="rgba(255,87,34,0.1)" stroke-width="2" fill="none" />
+                <path d="M 0 600 Q 200 500 400 650" stroke="var(--orange)" stroke-width="2" fill="none" opacity="0.3" />
+                <rect x="40" y="40" width="320" height="720" stroke="rgba(255,255,255,0.05)" stroke-width="1"
+                    fill="none" />
             </svg>
+
+            <!-- Main Content Container -->
+            <div style="z-index: 10; display: flex; flex-direction: column; height: 100%;">
+
+                <h2>The Cost Advantage<span class="sys-cite">[cite: 1]</span></h2>
+
+                <!-- Quote Box -->
+                <div class="quote-container" style="margin-top: 10px; margin-bottom: 20px; padding: 18px 20px;">
+                    <div class="quote-icon">"</div>
+                    <p style="font-size: 13.5px; font-style: italic; color: var(--white); line-height: 1.6;">
+                        Stop paying more simply because your mailing list grows. With Campaign Stack, your
+                        infrastructure costs remain flat.<span class="sys-cite">[cite: 1]</span>
+                    </p>
+                </div>
+
+                <!-- Call to Action Box -->
+                <div
+                    style="background: rgba(255, 255, 255, 0.04); border-left: 3px solid var(--orange); padding: 16px 16px; border-radius: 0 6px 6px 0; margin-bottom: 20px;">
+                    <p
+                        style="font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 4px; letter-spacing: 0.5px;">
+                        READY TO SCALE?
+                    </p>
+                    <p style="font-size: 13px; color: #CBD5E1; line-height: 1.5; margin: 0;">
+                        To request a demo, contact:
+                    </p>
+                </div>
+
+                <!-- Contact Details List -->
+                <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;">
+                    <!-- Email -->
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div
+                            style="width: 30px; height: 30px; background: var(--orange-glow); border: 1px solid var(--orange); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--orange); flex-shrink: 0;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </svg>
+                        </div>
+                        <a href="mailto:info@carvingit.com"
+                            style="font-family: 'Poppins', sans-serif; font-size: 13.5px; font-weight: 600; color: var(--white); text-decoration: none;">
+                            info@carvingit.com
+                        </a>
+                    </div>
+
+                    <!-- Phone -->
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div
+                            style="width: 30px; height: 30px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--white); flex-shrink: 0; margin-top: 2px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div
+                            style="font-family: 'Roboto', sans-serif; font-size: 13.5px; font-weight: 500; color: #CBD5E1; line-height: 1.5;">
+                            <div>+91 9420121704</div>
+                            <div>+91 8605789833</div>
+                        </div>
+                    </div>
+
+                    <!-- Website -->
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div
+                            style="width: 30px; height: 30px; background: var(--orange-glow); border: 1px solid var(--orange); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--orange); flex-shrink: 0;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10z"></path>
+                            </svg>
+                        </div>
+                        <a href="https://www.carvingit.com" target="_blank"
+                            style="font-family: 'Poppins', sans-serif; font-size: 13.5px; font-weight: 700; color: var(--orange); text-decoration: none; letter-spacing: 0.5px;">
+                            www.carvingit.com<span class="sys-cite">[cite: 1]</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Footer Tagline & Company Branding -->
+                <div
+                    style="margin-top: auto; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                    <h3 style="color: var(--white); font-size: 15px; letter-spacing: 0.5px;">
+                        OWN YOUR STACK.<br><span style="color: var(--orange);">SCALE WITHOUT LIMITS.</span><span
+                            class="sys-cite">[cite: 1]</span>
+                    </h3>
+                    <p
+                        style="font-family: 'Poppins'; font-weight: 800; font-size: 12px; color: var(--white); opacity: 0.9; letter-spacing: 2px; margin-top: 10px;">
+                        CARVING IT PVT. LTD.<span class="sys-cite">[cite: 1]</span>
+                    </p>
+                </div>
+
+            </div>
         </div>
 
         <!-- Front Cover (Right) -->
